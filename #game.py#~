@@ -1,0 +1,47 @@
+import pygame
+pygame.init()
+
+d_width = 800
+d_height = 600
+
+black = (0,0,0)
+white = (255,255,255)
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+
+
+gameDisplay = pygame.display.set_mode((d_width,d_height))
+pygame.display.set_caption('Game Window Title')
+clock = pygame.time.Clock()
+pPaddleImg = pygame.image.load('player_paddle.png')
+
+def p_paddle(x,y):
+    gameDisplay.blit(pPaddleImg,(x,y))
+
+x = (d_width * 0.1)
+y = (d_height * 0.5)
+
+y_change = 15
+    
+crashed = False;
+
+while not crashed:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            crashed = True
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                y += y_change
+            elif event.key == pyagme.K_DOWN:
+                y -= y_change
+    
+    gameDisplay.fill(black)
+    p_paddle(x,y)
+    pygame.display.update()
+    clock.tick(60)
+
+pygame.quit()
+quit()
+
