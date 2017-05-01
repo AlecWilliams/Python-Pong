@@ -3,7 +3,6 @@ import time
 
 #========TODO=========
 # -make ai paddle img
-# -fix ai paddle collisions
 # -make ai paddle more interesting 
 # -fix bug when ball hits top of paddle
 # -fix player score and make ai score
@@ -103,10 +102,10 @@ def game_loop():
                     game_loop()
                 #if up is pressed move up
                 if event.key == pygame.K_UP and y > 10:
-                    y_change = -4
+                    y_change = -5
                 #if down is pressed move down
                 if event.key == pygame.K_DOWN and y < d_height - p_height:
-                    y_change = 4
+                    y_change = 5
                
             #if ey released, stop moving        
 	    if event.type == pygame.KEYUP:
@@ -139,11 +138,13 @@ def game_loop():
 
 #==================== Enemy ai paddle logic ====================
         #ai is a bit of a stretch here.... 
-        ai_y = b_y *0.9 - 40
+        ai_y = b_y * .9  - 35
         
         #idea. if ball_x is within 15 pixels, have a 10-30% chance of randomly jerking other direction to throw player off
         #idea. if ball_y within 40 pixels of bottom / top and x > 200 away from screen wdith, start moving paddle slowly in other direction
-
+        #if statement to set maxSpeed
+        #if b_y_speed < maxSpeed
+        #    b_y+=b_y??
         
         #render ai paddle
         ai_paddle(ai_x,ai_y)
@@ -163,10 +164,10 @@ def game_loop():
                 b_x_speed = -b_x_speed
                 b_y_speed += y_change /2
            # same lengthy collision check but for ai. probably a more efficient way to handle this
-           #this does not work. fix this !
-            if (ai_x < b_x+10 and ai_x-30 > b_x+10) and (ai_y <  b_y and  ai_y+100 > b_y+ 10):
-               b_x_speed = -b_x_speed
-               b_y_speed += y_change /2
+           #
+        if (ai_x < b_x+15) and (ai_y <  b_y+10 and ai_y+100 > b_y):
+            b_x_speed = -b_x_speed
+            b_y_speed += y_change /2
         pygame.display.update()
         clock.tick(120)
 
