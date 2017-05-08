@@ -13,6 +13,7 @@ class Ball(object):
 	self.y = y
 	self.diameter  = 20
        	self.image = image
+        self.image_rec = self.image.get_rect()
 	self.gameDisplay = gameDisplay
 	self.speed = 1
 	self.dWidth = displayWidth
@@ -39,19 +40,46 @@ class Ball(object):
 		self.movingDown = True
 	if self.movingRight:	
 		self.x += x * self.speed
+                #self.image_rec =  self.image_rec.move((self. x * self.speed),0)
 	else:
 		self.x -= x * self.speed
+                #self.image_rec =  self.image_rec.move(self.x,self.y)
 	if self.movingDown:
 		self.y += y * self.speed
+                #self.image_rec =  self.image_rec.move(self.x,self.y)
         else:
 		self.y -= y * self.speed
+                #self.image_rec =  self.image_rec.move(self.x,self.y)
+
+        #print(self.image_rec)
+ 
    # def hit_paddle(paddle_player, paddle_ai):
         
        # if x<paddle_player.x+paddle_width and y > player_paddle.y and y+diameter > player_paddle.y+paddle_height:
             
+
+
+    def playerCollision(self,playerP):
+        if (self.y > playerP.y and self.y < playerP.y + 100) and (self.x <= playerP.x + 50):
+            if self.movingRight:
+                self.movingRight = False
+            else:
+                self.movingRight = True
+            #check which way player is moving and create more if statements as
+            #necesarry to create correct movement
+            if self.movingDown:
+                self.movingDown = False
+            else:
+                self.movingDown = True
             
-    def run(self,x,y,):
+        
+            
+                
+
+    
+    def run(self,x,y,playerSpr):
         self.move(x,y)
+        self.playerCollision(playerSpr)
 	self.draw()
         
         

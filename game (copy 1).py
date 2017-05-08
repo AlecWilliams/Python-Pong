@@ -1,6 +1,5 @@
 import pygame
 import time
-import ball
 
 #========TODO=========
 # -make ai paddle img
@@ -123,19 +122,7 @@ def game_loop():
         
 #============Everything you draw comes after this!!==========================
         #Draw ball
-        #ball(b_x,b_y,white)
-
-
-
-
-
-
-        
-        ball.run()
-
-
-
-
+        ball(b_x,b_y,white)
         
         #ball logic!
         b_x -= b_x_speed

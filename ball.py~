@@ -1,0 +1,44 @@
+
+import pygame
+import random
+
+class Ball:
+    def _init_():
+        #initilize anything later on
+        self.vel = [1,1]
+        #used for collisions
+        self. paddle_x = 25
+        paddle_width = 50
+        paddle_height = 20
+        self.diameter = 10
+        self.color = (255,0,0)
+        
+        self.speed_inc = 2
+
+    def draw(x,y,color):
+        pygame.draw.circle(gameDisplay,color,[x,y],10,0)
+
+        
+    def move(x,y):
+        self.speed = self.vel
+        
+        
+        
+    def start():
+        self.x = w_width/2
+        self.y = w_height/2
+
+        speed = 0
+        speed_count = 0
+
+        
+   # def hit_paddle(paddle_player, paddle_ai):
+        
+       # if x<paddle_player.x+paddle_width and y > player_paddle.y and y+diameter > player_paddle.y+paddle_height:
+            
+            
+    def run(self):
+        self.draw(self.x,self.y,self.color)
+        self.move(self.x,self.y)
+        
+        
