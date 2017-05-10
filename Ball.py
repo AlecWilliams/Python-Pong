@@ -20,7 +20,7 @@ class Ball(object):
 	self.dHeight = displayHeight
 
 	self.movingDown = True
-	self.movingRight = True
+	self.movingRight = False
 	#self.draw(gameDisplay)
 
     def draw(self):
@@ -49,37 +49,58 @@ class Ball(object):
                 #self.image_rec =  self.image_rec.move(self.x,self.y)
         else:
 		self.y -= y * self.speed
-                #self.image_rec =  self.image_rec.move(self.x,self.y)
-
-        #print(self.image_rec)
- 
-   # def hit_paddle(paddle_player, paddle_ai):
-        
-       # if x<paddle_player.x+paddle_width and y > player_paddle.y and y+diameter > player_paddle.y+paddle_height:
+                #self.image_rec =  self.image_rec.move(self.x,self.
             
 
-
+    #Player paddle collisions
     def playerCollision(self,playerP):
-        if (self.y > playerP.y and self.y < playerP.y + 100) and (self.x <= playerP.x + 50):
+        #Collisions for front of player paddle
+        if (self.y > playerP.y and self.y < playerP.y + 100) and (self.x <= playerP.x + 20):
             if self.movingRight:
                 self.movingRight = False
             else:
                 self.movingRight = True
             #check which way player is moving and create more if statements as
             #necesarry to create correct movement
-            if self.movingDown:
+            if self.movingDown and playerP.movingDown:
+                self.movingDown = True
+            if not self.movingDown:
                 self.movingDown = False
             else:
                 self.movingDown = True
             
-        
+        #Collisions for top of player paddle
+        if (self.x+10 > playerP.x and self.x < playerP.x + 20) and (self.y + 25  >= playerP.y and self.y + 25 < playerP.y+10):
+            self.movingDown = False
+            print('Top Hit')
+#====================================================#
+    #aiPaddle collisions
+    def aiCollision(self,playerP):
+        #Collisions for front of player paddle
+        if (self.y > playerP.y and self.y < playerP.y + 100) and (self.x+10 >= playerP.x):
+            if self.movingRight:
+                self.movingRight = False
+            else:
+                self.movingRight = True
             
+            if self.movingDown and playerP.movingDown:
+                self.movingDown = True
+            if not self.movingDown:
+                self.movingDown = False
+            else:
+                self.movingDown = True
+            
+        #Collisions for top of player paddle
+        if (self.x+10 > playerP.x and self.x < playerP.x) and self.y + 25  >= playerP.y:
+            self.movingDown = False
+            print('Top Hit AI')
                 
 
     
-    def run(self,x,y,playerSpr):
+    def run(self,x,y,playerSpr,aiPaddle):
         self.move(x,y)
         self.playerCollision(playerSpr)
+        self.aiCollision(aiPaddle)
 	self.draw()
         
         

@@ -2,7 +2,15 @@ import pygame
 import time
 from Ball import Ball
 from player_paddle import Paddle
+from Score import Score
 
+#=========TODO==========#
+# Playerpaddle bottom side collisions
+# AI paddle
+# Score
+# Speed multiplier
+# Menu?
+# aiPaddle image
 
 pygame.init()
 
@@ -14,6 +22,7 @@ dHeight = 600
 ballImg = pygame.image.load('ball.png')
 ballImg = pygame.transform.scale(ballImg,(20,20))
 playerPaddleImg = pygame.image.load('player_paddle.png')
+aiPaddleImg = pygame.image.load('player_paddle.png')
 #playerPaddleRec = playerPaddleImg.get_rect()
 
 #=======Colors=======
@@ -31,8 +40,9 @@ clock = pygame.time.Clock()
 
 #Initialize the objects
 ball = Ball(200,200,ballImg,gameDisplay,dWidth,dHeight)
-playerPaddle = Paddle(10,350,playerPaddleImg,50,100,gameDisplay,dWidth,dHeight)
-
+playerPaddle = Paddle(10,350,playerPaddleImg,20,90,gameDisplay,dWidth,dHeight)
+aiPaddle = Paddle(dWidth - 30,350,aiPaddleImg,20,90,gameDisplay,dWidth,dHeight,ball)
+scoreObject = Score(ball,gameDisplay,dWidth)
 x = 5
 y = 5
 
@@ -53,6 +63,9 @@ def game_loop():
                 if event.key == pygame.K_r:
                     gameExit = True
                     game_loop()
+	if keys[pygame.K_r]:
+	    gameExit = True
+	    #game_loop()
         if keys[pygame.K_DOWN]:
             playerPaddle.moveD()
         if keys[pygame.K_UP]:
@@ -60,9 +73,13 @@ def game_loop():
         #render background black
         gameDisplay.fill(black)
 	
-	ball.run(x,y,playerPaddle)
+	ball.run(x,y,playerPaddle,aiPaddle)
 	playerPaddle.draw()
-	
+        aiPaddle.draw()
+        aiPaddle.moveAi()
+        #Scores
+        scoreObject.run()
+	scoreObject.displayScores()
 
 
 	
