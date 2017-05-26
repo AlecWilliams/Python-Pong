@@ -11,9 +11,9 @@ class Score(object):
         self.white = (255,0,255)
 
     def run(self):
-        if self.ball.x <= 0:
+        if self.ball.x <  0:
             self.aiScore += 1
-        if self.ball.x >= self.dWidth:
+        if self.ball.x+15 >= self.dWidth:
             self.playerScore += 1
 
 
@@ -24,12 +24,13 @@ class Score(object):
     def displayScores(self):
         text = pygame.font.Font('freesansbold.ttf', 75)
         textSurf, textRect = self.textObject(self.aiScore, text)
-        #textRect = self.textObject(self.playerScore, text)
-        textRect.center = ((self.dWidth/4), (20))
+        textSurf2, textRect2  = self.textObject(self.playerScore, text)
+        textRect.center = ((self.dWidth/4), (40))
+	textRect2.center = (((self.dWidth*3)/4),(40))
+	self.gameDisplay.blit(textSurf2, textRect2)
         self.gameDisplay.blit(textSurf, textRect)
         pygame.display.update()
         
-
 
 
     

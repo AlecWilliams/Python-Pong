@@ -45,7 +45,7 @@ aiPaddle = Paddle(dWidth - 30,350,aiPaddleImg,20,90,gameDisplay,dWidth,dHeight,b
 scoreObject = Score(ball,gameDisplay,dWidth)
 x = 5
 y = 5
-
+gameExit = False
 def game_loop():
  
     #dont exit game instantly (duh)
@@ -62,7 +62,8 @@ def game_loop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     gameExit = True
-                    game_loop()
+	            game_loop()
+
 	if keys[pygame.K_r]:
 	    gameExit = True
 	    #game_loop()

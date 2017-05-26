@@ -61,16 +61,16 @@ class Paddle(object):
 #
 #
     def moveAi(self):
-        if self.ball.x > self.dWidth / 2:
+        if self.ball.x > self.dWidth / 2 and self.ball.x +20 <self.x:
             #if ball is above, move up
-            if self.ball.y < self.y + self.height / 2:
+            if self.ball.y+self.height+3 < self.y + self.height / 2:
                 self.y -= self.speed
             #if ball is below, move down
-            if self.ball.y > self.y+ self.height / 2:
+            if self.ball.y + self.height+2 > self.y+ self.height / 2:
                 self.y += self.speed
             
 
-
+#to revert, remove the (and self.ball.x +2... and the the self.height from keft side
 
 
     
